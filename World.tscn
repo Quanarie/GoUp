@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Art/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Environment/StaticPlatform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/MovingPlatform.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -201,8 +202,12 @@ boots_active = false
 [node name="Environement" type="Node" parent="."]
 
 [node name="StaticPlatform" parent="Environement" instance=ExtResource( 3 )]
-position = Vector2( 310, 188 )
-
-[node name="StaticPlatform2" parent="Environement" instance=ExtResource( 3 )]
 position = Vector2( 396, 85 )
 rotation = -1.5708
+
+[node name="MovingPlatform" parent="Environement" instance=ExtResource( 4 )]
+position = Vector2( 222, 177 )
+
+[node name="MovingPlatform2" parent="Environement" instance=ExtResource( 4 )]
+position = Vector2( 311, 178 )
+move_offset = Vector2( 0, -100 )
