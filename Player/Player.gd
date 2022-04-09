@@ -14,6 +14,10 @@ var velocity = Vector2.ZERO
 onready var sprite = $Sprite
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("activate_boots"):
+		if boots_active: boots_active = false
+		else: boots_active = true
+	
 	if boots_active:
 		rotation_degrees = -90
 		velocity.x += gravity * delta
