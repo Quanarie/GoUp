@@ -7,7 +7,7 @@ export var jump_force = 400
 export var jump_decrease_on_release_coefficient = 2
 export var slowdown_coefficient_ground = 0.5
 export var slowdown_coefficient_air = 0.05
-export var dash_force = 300
+export var dash_force = 150
 
 var velocity = Vector2.ZERO
 var boots_active = false
@@ -31,14 +31,20 @@ func dash():
 	if is_on_floor():
 		can_dash = true
 	
-	if Input.is_action_just_pressed("dash") and can_dash:
-		dash_direction.x = -Input.get_action_strength("ui_left") + Input.get_action_strength("ui_right")
-		dash_direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-		velocity = dash_direction * dash_force
-		can_dash = false
-		dashing = true
-		yield(get_tree().create_timer(0.2), "timeout")
-		dashing = false
+	var input = Vector2.ZERO
+	input.x = -Input.get_action_strength("ui_left") + Input.get_action_strength("ui_right")
+	input.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	if input.x != 0: dash_direction.x = input.x
+	if input.y != 0: dash_direction.y = input.y
+	
+	if Input.is_action_just_pressed("dash") and can_dash and !is_on_floor():
+		if dash_direction != Vector2.ZERO:
+			velocity = dash_direction * dash_force
+			can_dash = false
+			dashing = true
+			yield(get_tree().create_timer(0.2), "timeout")
+			dashing = false
 	if dashing:
 		velocity = move_and_slide(velocity)
 		
