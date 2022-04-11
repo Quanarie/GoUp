@@ -7,17 +7,41 @@ export var jump_force = 400
 export var jump_decrease_on_release_coefficient = 2
 export var slowdown_coefficient_ground = 0.5
 export var slowdown_coefficient_air = 0.05
+export var dash_force = 300
 
 var velocity = Vector2.ZERO
 var boots_active = false
+
+var dash_direction = Vector2.ZERO
+var can_dash = false
+var dashing = false
+
 
 onready var sprite = $Sprite
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("activate_boots"):
 		boots_active = !boots_active
+	
+	dash()
+	if !dashing:
+		movement(delta)
+	
+func dash():
+	if is_on_floor():
+		can_dash = true
+	
+	if Input.is_action_just_pressed("dash") and can_dash:
+		dash_direction.x = -Input.get_action_strength("ui_left") + Input.get_action_strength("ui_right")
+		dash_direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		velocity = dash_direction * dash_force
+		can_dash = false
+		dashing = true
+		yield(get_tree().create_timer(0.2), "timeout")
+		dashing = false
+	if dashing:
+		velocity = move_and_slide(velocity)
 		
-	movement(delta)
 
 func movement(delta):
 	if boots_active:
