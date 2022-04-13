@@ -28,7 +28,6 @@ shape = SubResource( 2 )
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 0
 collision_mask = 8
-damage = 100
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 2 )
@@ -39,6 +38,7 @@ repeat = true
 playback_process_mode = 0
 playback/repeat = true
 
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_area_entered"]
 [connection signal="tween_completed" from="MoveTween" to="." method="_on_MoveTween_tween_completed"]
 
 [editable path="Hitbox"]

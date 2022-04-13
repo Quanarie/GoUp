@@ -135,3 +135,4 @@ func death():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	area.recharge()
