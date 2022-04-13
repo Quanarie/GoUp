@@ -130,8 +130,8 @@ func unactive_boots_movement(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func death():
-	queue_free()
-
+	stats.health = stats.max_health
+	position = Vector2.ZERO
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
