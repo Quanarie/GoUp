@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Art/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Environment/StaticPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/MovingPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemy/Spikes.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -242,3 +243,62 @@ position = Vector2( 356, -288 )
 rotation = -1.5708
 move_offset = Vector2( 0, -50 )
 is_turned = true
+
+[node name="Spikes" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 312, 232 )
+
+[node name="Spikes2" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 328, 232 )
+
+[node name="Spikes3" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 344, 232 )
+
+[node name="Spikes4" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 360, 232 )
+
+[node name="Spikes5" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 376, 232 )
+
+[node name="Spikes6" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 392, 232 )
+
+[node name="Spikes7" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 408, 232 )
+
+[node name="Spikes8" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 424, 232 )
+
+[node name="Spikes9" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, 232 )
+
+[node name="Spikes10" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -168 )
+rotation = -1.5708
+
+[node name="Spikes11" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -152 )
+rotation = -1.5708
+
+[node name="Spikes12" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -136 )
+rotation = -1.5708
+
+[node name="Spikes13" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -120 )
+rotation = -1.5708
+
+[node name="Spikes14" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -104 )
+rotation = -1.5708
+
+[node name="Spikes15" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -88 )
+rotation = -1.5708
+
+[node name="Spikes16" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -72 )
+rotation = -1.5708
+
+[node name="Spikes17" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -56 )
+rotation = -1.5708

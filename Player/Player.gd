@@ -5,9 +5,9 @@ export var acceleration = 1000
 export var max_speed = 200
 export var jump_force = 400
 export var jump_decrease_on_release_coefficient = 2
-export var slowdown_coefficient_ground = 0.5
+export var slowdown_coefficient_ground = 0.8
 export var slowdown_coefficient_air = 0.05
-export var dash_force = 250
+export var dash_force = 220
 
 var velocity = Vector2.ZERO
 var boots_active = false
@@ -16,8 +16,11 @@ var dash_direction = Vector2.ZERO
 var can_dash = false
 var dashing = false
 
-
 onready var sprite = $Sprite
+onready var stats = PlayerStats
+
+func _ready():
+	stats.connect("no_health", self, "death")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("activate_boots"):
@@ -37,17 +40,20 @@ func dash():
 	
 	if input != Vector2.ZERO:
 		dash_direction = input
+	elif boots_active:
+		dash_direction = Vector2(-1, 0)
+	else:
+		dash_direction = Vector2(0, -1)
 	
 	if Input.is_action_just_pressed("dash") and can_dash and !is_on_floor():
 		if dash_direction != Vector2.ZERO:
-			velocity = dash_direction * dash_force
+			velocity = dash_direction.normalized() * dash_force
 			can_dash = false
 			dashing = true
 			yield(get_tree().create_timer(0.2), "timeout")
 			dashing = false
 	if dashing:
 		velocity = move_and_slide(velocity)
-		
 
 func movement(delta):
 	if boots_active:
@@ -122,3 +128,10 @@ func unactive_boots_movement(delta):
 		velocity.x = lerp(velocity.x, 0, slowdown_coefficient_air)
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+func death():
+	queue_free()
+
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage
