@@ -15,6 +15,8 @@ func _ready():
 		set_tween(start_position, start_position + move_offset)
 	
 func set_tween(from, to):
+	if move_offset == Vector2.ZERO:
+		return
 	tween.interpolate_property(self, "position", from, to, duration, 
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, IDLE_DURATION)
 	tween.interpolate_property(self, "position", to, from, duration, 

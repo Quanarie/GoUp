@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Enemy/MovingEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Art/Slime.png" type="Texture" id=2]
 [ext_resource path="res://Other/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Stats.gd" type="Script" id=4]
+[ext_resource path="res://Other/Hurtbox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 7, 5.5 )
+extents = Vector2( 6, 5 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 7 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 9, 8 )
 
 [node name="Slime" type="KinematicBody2D"]
@@ -22,23 +27,36 @@ texture = SubResource( 1 )
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2.5 )
+position = Vector2( 0, 2 )
 shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 0
 collision_mask = 8
+mask_hurtbox_number = 3
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 2 )
 shape = SubResource( 3 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, 2 )
+shape = SubResource( 4 )
 
 [node name="MoveTween" type="Tween" parent="."]
 repeat = true
 playback_process_mode = 0
 playback/repeat = true
 
-[connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_area_entered"]
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="tween_completed" from="MoveTween" to="." method="_on_MoveTween_tween_completed"]
 
 [editable path="Hitbox"]
+[editable path="Hurtbox"]
