@@ -3,11 +3,15 @@ extends KinematicBody2D
 export var gravity = 1000
 export var acceleration = 1000
 export var max_speed = 200
+
 export var jump_force = 400
 export var jump_decrease_on_release_coefficient = 2
+
 export var slowdown_coefficient_ground = 0.8
 export var slowdown_coefficient_air = 0.05
+
 export var dash_force = 220
+export var dash_duration = 0.2
 
 var velocity = Vector2.ZERO
 var boots_active = false
@@ -44,15 +48,17 @@ func dash():
 		dash_direction = Vector2(-1, 0)
 	else:
 		dash_direction = Vector2(0, -1)
-	
+		
 	if Input.is_action_just_pressed("dash") and can_dash and !is_on_floor():
 		if dash_direction != Vector2.ZERO:
 			velocity = dash_direction.normalized() * dash_force
 			can_dash = false
 			dashing = true
-			yield(get_tree().create_timer(0.2), "timeout")
+			yield(get_tree().create_timer(dash_duration), "timeout")
 			dashing = false
 	if dashing:
+		if input != Vector2.ZERO:
+			velocity = lerp(velocity, input * dash_force, 0.05)
 		velocity = move_and_slide(velocity)
 
 func movement(delta):
