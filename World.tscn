@@ -213,41 +213,35 @@ remote_path = NodePath("../../Camera2D")
 [node name="Environement" type="Node" parent="."]
 
 [node name="StaticPlatform" parent="Environement" instance=ExtResource( 3 )]
-position = Vector2( 225, 194 )
+position = Vector2( 192, 196 )
 
 [node name="StaticPlatform2" parent="Environement" instance=ExtResource( 3 )]
-position = Vector2( 280, 133 )
+position = Vector2( 295, 119 )
 rotation = -1.5708
 
 [node name="StaticPlatform3" parent="Environement" instance=ExtResource( 3 )]
-position = Vector2( 238, 43 )
+position = Vector2( 211, 39 )
 rotation = -1.5708
 
 [node name="StaticPlatform4" parent="Environement" instance=ExtResource( 3 )]
-position = Vector2( 202, -42 )
+position = Vector2( 213, -168 )
 rotation = -1.5708
 
 [node name="StaticPlatform5" parent="Environement" instance=ExtResource( 3 )]
-position = Vector2( 238, -78 )
+position = Vector2( 304, -241 )
 
 [node name="MovingPlatform2" parent="Environement" instance=ExtResource( 4 )]
-position = Vector2( 274, -235 )
+position = Vector2( 343, -458 )
 rotation = -1.5708
 move_offset = Vector2( 0, 50 )
 is_turned = true
 
 [node name="MovingPlatform" parent="Environement" instance=ExtResource( 4 )]
-position = Vector2( 174, -132 )
+position = Vector2( 239, -295 )
 
 [node name="Slime2" parent="Environement/MovingPlatform" instance=ExtResource( 6 )]
 position = Vector2( -13, -16 )
 move_offset = Vector2( 30, 0 )
-
-[node name="MovingPlatform3" parent="Environement" instance=ExtResource( 4 )]
-position = Vector2( 356, -288 )
-rotation = -1.5708
-move_offset = Vector2( 0, -50 )
-is_turned = true
 
 [node name="Spikes" parent="Environement" instance=ExtResource( 5 )]
 position = Vector2( 312, 232 )
@@ -277,39 +271,39 @@ position = Vector2( 424, 232 )
 position = Vector2( 440, 232 )
 
 [node name="Spikes10" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -168 )
+position = Vector2( 440, -269 )
 rotation = -1.5708
 
 [node name="Spikes11" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -152 )
+position = Vector2( 440, -253 )
 rotation = -1.5708
 
 [node name="Spikes12" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -136 )
+position = Vector2( 440, -237 )
 rotation = -1.5708
 
 [node name="Spikes13" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -120 )
+position = Vector2( 440, -221 )
 rotation = -1.5708
 
 [node name="Spikes14" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -104 )
+position = Vector2( 440, -205 )
 rotation = -1.5708
 
 [node name="Spikes15" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -88 )
+position = Vector2( 440, -189 )
 rotation = -1.5708
 
 [node name="Spikes16" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -72 )
+position = Vector2( 440, -173 )
 rotation = -1.5708
 
 [node name="Spikes17" parent="Environement" instance=ExtResource( 5 )]
-position = Vector2( 440, -56 )
+position = Vector2( 440, -157 )
 rotation = -1.5708
 
 [node name="Slime" parent="Environement" instance=ExtResource( 6 )]
-position = Vector2( 264, 145 )
+position = Vector2( 279, 131 )
 rotation = -1.5708
 move_offset = Vector2( 0, -30 )
 is_turned = true
@@ -320,6 +314,38 @@ move_offset = Vector2( 0, 0 )
 
 [node name="Stats" parent="Environement/Slime2" index="6"]
 max_health = 2
+
+[node name="Spikes18" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -141 )
+rotation = -1.5708
+
+[node name="Spikes19" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -125 )
+rotation = -1.5708
+
+[node name="Spikes20" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -109 )
+rotation = -1.5708
+
+[node name="Spikes21" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -93 )
+rotation = -1.5708
+
+[node name="Spikes22" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -77 )
+rotation = -1.5708
+
+[node name="Spikes23" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -61 )
+rotation = -1.5708
+
+[node name="Spikes24" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -45 )
+rotation = -1.5708
+
+[node name="Spikes25" parent="Environement" instance=ExtResource( 5 )]
+position = Vector2( 440, -29 )
+rotation = -1.5708
 
 [editable path="Environement/Slime2"]
 [editable path="Environement/Slime2/Hitbox"]
