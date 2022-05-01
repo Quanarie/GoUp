@@ -11,7 +11,7 @@ export var slowdown_coefficient_ground = 0.8
 export var slowdown_coefficient_air = 0.07
 
 export var dash_force = 250
-export var dash_duration = 0.2
+export var dash_duration = 0.2 
 
 var velocity = Vector2.ZERO
 var boots_active = false
@@ -19,6 +19,7 @@ var boots_active = false
 var dash_direction = Vector2.ZERO
 var can_dash = false
 var dashing = false
+var is_dash_animation_ended = true
 
 var attacking = false
 
@@ -59,6 +60,7 @@ func dash():
 		
 	if Input.is_action_just_pressed("dash") and can_dash and !is_on_floor():
 		if dash_direction != Vector2.ZERO:
+			is_dash_animation_ended = false
 			animationTree.set("parameters/State/current", 3)
 			velocity = dash_direction.normalized() * dash_force
 			can_dash = false
@@ -71,19 +73,20 @@ func dash():
 		velocity = move_and_slide(velocity)
 
 func movement(delta):
-	if is_on_floor() and !attacking:
-		animationTree.set("parameters/State/current", 0)
-	elif !attacking:
-		animationTree.set("parameters/State/current", 1)
-	
-	if (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down") or
-		Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
-			animationTree.set("parameters/Movement/current", 1)
-	else:
-		animationTree.set("parameters/Movement/current", 0)
+	if is_dash_animation_ended:
+		if is_on_floor() and !attacking:
+			animationTree.set("parameters/State/current", 0)
+		elif !attacking:
+			animationTree.set("parameters/State/current", 1)
 		
-	if Input.is_action_just_pressed("jump"):
-		animationTree.set("parameters/InAir/current", 0)
+		if (boots_active and (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")) or
+			!boots_active and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"))):
+				animationTree.set("parameters/Movement/current", 1)
+		else:
+			animationTree.set("parameters/Movement/current", 0)
+			
+		if Input.is_action_just_pressed("jump"):
+			animationTree.set("parameters/InAir/current", 0)
 
 	if boots_active:
 		active_boots_movement(delta)
@@ -172,3 +175,5 @@ func _on_attack_animation_ended():
 func _on_air_animation_ended():
 	animationTree.set("parameters/InAir/current", 1)
 	
+func _on_dash_animation_ended():
+	is_dash_animation_ended = true

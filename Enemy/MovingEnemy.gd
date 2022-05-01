@@ -26,5 +26,3 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 
 func death():
 	animator.play("Death")
-	yield(get_tree().create_timer(animator.get_animation("Death").length), "timeout")
-	queue_free()

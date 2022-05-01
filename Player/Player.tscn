@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://Art/Player.png" type="Texture" id=1]
+[ext_resource path="res://Art/Sprite-0009-Sheet (5).png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Other/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Other/Hitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/DashBackTrail.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 9.75 )
@@ -19,7 +20,7 @@ height = 10.0
 [sub_resource type="Animation" id=12]
 resource_name = "AttackLeg"
 length = 0.16
-step = 0.08
+step = 0.04
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -27,10 +28,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.08 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.04, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 127, 128 ]
+"values": [ 126, 127, 128 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
@@ -61,8 +62,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "Dash"
-length = 0.3
-loop = true
+length = 0.45
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -70,10 +71,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 84, 85, 86, 118 ]
+"values": [ 84, 85, 86, 87, 88 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -87,6 +88,20 @@ tracks/1/keys = {
 "values": [ {
 "args": [  ],
 "method": "_on_air_animation_ended"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.45 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_dash_animation_ended"
 } ]
 }
 
@@ -279,24 +294,27 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "output", 0, "State", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Animation 6", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Movement", 0, "Animation", "Movement", 1, "Animation 2" ]
+node_connections = [ "output", 0, "State", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Animation 6" ]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 slowdown_coefficient_air = 0.2
+dash_duration = 0.3
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 flip_h = true
 hframes = 21
-vframes = 12
+vframes = 13
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 0.25 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 4 )]
+visible = false
 collision_layer = 0
 collision_mask = 16
 recharge_time = 0
@@ -332,6 +350,8 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/InAir/current = 1
 parameters/Movement/current = 0
 parameters/State/current = 1
+
+[node name="DashBackTrail" parent="." instance=ExtResource( 5 )]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
