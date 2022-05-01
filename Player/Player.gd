@@ -30,6 +30,7 @@ onready var animationTree = $AnimationTree
 func _ready():
 	stats.connect("no_health", self, "death")
 	animationTree.active = true
+	stats.player = self
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("activate_boots"):
@@ -85,7 +86,7 @@ func movement(delta):
 		else:
 			animationTree.set("parameters/Movement/current", 0)
 			
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and is_on_floor():
 			animationTree.set("parameters/InAir/current", 0)
 
 	if boots_active:
