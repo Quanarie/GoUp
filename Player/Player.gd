@@ -33,7 +33,10 @@ func _ready():
 	stats.player = self
 
 func _physics_process(delta):
+	print(velocity)
 	if Input.is_action_just_pressed("activate_boots"):
+		if !boots_active: velocity.x = 0
+		else: velocity.y = 0
 		boots_active = !boots_active
 		
 	if Input.is_action_just_pressed("attack"):
