@@ -5,7 +5,7 @@ onready var collision_shape = $CollisionShape2D
 onready var animator = $AnimationPlayer
 
 func _on_Area2D_body_entered(body):
-	if body == PlayerStats.player:
+	if body == Globals.player:
 		dissapear()
 		
 func dissapear():

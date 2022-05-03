@@ -24,16 +24,17 @@ var is_dash_animation_ended = true
 var attacking = false
 
 onready var sprite = $Sprite
-onready var stats = PlayerStats
+onready var stats = $PlayerStats
 onready var animationTree = $AnimationTree
 
 func _ready():
 	stats.connect("no_health", self, "death")
 	animationTree.active = true
-	stats.player = self
+	Globals.player = self
+	Globals.playerStats = stats
 
 func _physics_process(delta):
-	print(velocity)
+	print(is_dash_animation_ended)
 	if Input.is_action_just_pressed("activate_boots"):
 		if !boots_active: velocity.x = 0
 		else: velocity.y = 0
@@ -42,7 +43,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		animationTree.set("parameters/State/current", 2)
 		attacking = true
-	
+	animate()
 	dash()
 	if !dashing:
 		movement(delta)
@@ -66,6 +67,13 @@ func dash():
 		if dash_direction != Vector2.ZERO:
 			is_dash_animation_ended = false
 			animationTree.set("parameters/State/current", 3)
+			
+			if ((dash_direction.normalized() == Vector2(0, -1) and !boots_active) or
+				dash_direction.normalized() == Vector2(-1, 0) and boots_active):
+				animationTree.set("parameters/Dash/current", 1)
+			else:
+				animationTree.set("parameters/Dash/current", 0)
+			
 			velocity = dash_direction.normalized() * dash_force
 			can_dash = false
 			dashing = true
@@ -76,22 +84,23 @@ func dash():
 			velocity = lerp(velocity, input * dash_force, 0.05)
 		velocity = move_and_slide(velocity)
 
-func movement(delta):
+func animate():
 	if is_dash_animation_ended:
 		if is_on_floor() and !attacking:
 			animationTree.set("parameters/State/current", 0)
 		elif !attacking:
 			animationTree.set("parameters/State/current", 1)
 		
-		if (boots_active and (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")) or
-			!boots_active and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"))):
-				animationTree.set("parameters/Movement/current", 1)
-		else:
-			animationTree.set("parameters/Movement/current", 0)
-			
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			animationTree.set("parameters/InAir/current", 0)
+	if (boots_active and (Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")) or
+		!boots_active and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"))):
+			animationTree.set("parameters/Movement/current", 1)
+	else:
+		animationTree.set("parameters/Movement/current", 0)
+		
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		animationTree.set("parameters/InAir/current", 0)
 
+func movement(delta):
 	if boots_active:
 		active_boots_movement(delta)
 	else:
@@ -167,14 +176,18 @@ func unactive_boots_movement(delta):
 
 func death():
 	stats.health = stats.max_health
-	position = Vector2.ZERO
+	position = stats.last_checkpoint
+	velocity = Vector2.ZERO
+	boots_active = false
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	Globals.camera.shake()
 	area.recharge()
 
 func _on_attack_animation_ended():
 	attacking = false
+	_on_dash_animation_ended()
 
 func _on_air_animation_ended():
 	animationTree.set("parameters/InAir/current", 1)

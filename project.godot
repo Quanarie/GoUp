@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-PlayerStats="*res://Player/PlayerStats.tscn"
+Globals="*res://Other/Globals.gd"
 
 [display]
 
