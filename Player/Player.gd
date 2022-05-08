@@ -183,7 +183,8 @@ func death():
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	Globals.camera.shake()
-	area.recharge()
+	if area:
+		area.recharge()
 
 func _on_attack_animation_ended():
 	attacking = false
