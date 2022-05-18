@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprite-0009new-Sheet.png-1b529065737cd020d5530c5eae31b65d.stex"
+path="res://.import/CheckPoint.png-2436c9994ead6473ed128ac764534874.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Sprite-0009new-Sheet.png"
-dest_files=[ "res://.import/Sprite-0009new-Sheet.png-1b529065737cd020d5530c5eae31b65d.stex" ]
+source_file="res://Art/CheckPoint.png"
+dest_files=[ "res://.import/CheckPoint.png-2436c9994ead6473ed128ac764534874.stex" ]
 
 [params]
 

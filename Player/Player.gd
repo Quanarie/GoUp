@@ -34,7 +34,6 @@ func _ready():
 	Globals.playerStats = stats
 
 func _physics_process(delta):
-	print(is_dash_animation_ended)
 	if Input.is_action_just_pressed("activate_boots"):
 		if !boots_active: velocity.x = 0
 		else: velocity.y = 0
@@ -173,6 +172,9 @@ func unactive_boots_movement(delta):
 		velocity.x = lerp(velocity.x, 0, slowdown_coefficient_air)
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+func apply_force(force):
+	velocity += force
 
 func death():
 	stats.health = stats.max_health

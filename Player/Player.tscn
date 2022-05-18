@@ -1,10 +1,9 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://Art/Sprite-0009-Sheet (5).png" type="Texture" id=1]
+[ext_resource path="res://Art/Player.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Other/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Other/Hitbox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Player/DashBackTrail.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/PlayerStats.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -354,7 +353,7 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "output", 0, "State", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3" ]
+node_connections = [ "Movement", 0, "Animation", "Movement", 1, "Animation 2", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "output", 0, "State" ]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -412,8 +411,6 @@ parameters/Dash/current = 0
 parameters/InAir/current = 1
 parameters/Movement/current = 0
 parameters/State/current = 1
-
-[node name="DashBackTrail" parent="." instance=ExtResource( 5 )]
 
 [node name="PlayerStats" parent="." instance=ExtResource( 6 )]
 max_health = 10
