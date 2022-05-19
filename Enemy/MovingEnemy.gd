@@ -1,5 +1,5 @@
 tool
-extends "res://Environment/MovingObject.gd"
+extends "res://Environment/Platforms/MovingObject.gd"
 
 onready var sprite = $Sprite
 onready var stats = $Stats

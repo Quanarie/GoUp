@@ -174,7 +174,7 @@ func unactive_boots_movement(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func apply_force(force):
-	velocity += force
+	velocity = force
 
 func death():
 	stats.health = stats.max_health

@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Player/DashReset.gd" type="Script" id=1]
+[ext_resource path="res://Environment/PowerUps/SpeedUp.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 42.0119
 
-[node name="DashReset" type="Node2D"]
+[node name="SpeedUp" type="Node2D"]
 script = ExtResource( 1 )
+speed_up_coefficient = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -14,3 +15,4 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

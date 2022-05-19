@@ -24,5 +24,6 @@ func _on_Area2D_body_entered(body):
 		respawn()
 
 func respawn():
+	velocity = Vector2.ZERO
 	position = start_pos
 	is_falling = false
