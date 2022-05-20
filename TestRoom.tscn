@@ -366,5 +366,6 @@ is_turned = true
 position = Vector2( -165, -135 )
 
 [node name="Demonaxe" parent="Environment" instance=ExtResource( 9 )]
-position = Vector2( -57, -137 )
+position = Vector2( -32, -27 )
 pieces_quantity = 10
+bound_degree = 90
