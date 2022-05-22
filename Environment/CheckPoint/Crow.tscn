@@ -25,7 +25,10 @@ animations = [ {
 
 [node name="Crow" type="Node2D"]
 script = ExtResource( 2 )
+speed = 250
+alive_time = 20
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
+frame = 1
 playing = true

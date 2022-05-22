@@ -54,7 +54,6 @@ func dash():
 	var input = Vector2.ZERO
 	input.x = -Input.get_action_strength("ui_left") + Input.get_action_strength("ui_right")
 	input.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	
 	if input != Vector2.ZERO:
 		dash_direction = input
 	elif boots_active:
@@ -79,11 +78,6 @@ func dash():
 			yield(get_tree().create_timer(dash_duration), "timeout")
 			dashing = false
 	if dashing:
-		if !boots_active and velocity.x == 0:
-			velocity.y = -dash_force
-		elif boots_active and velocity.y == 0:
-			velocity.x = -dash_force
-		
 		if input != Vector2.ZERO:
 			velocity = lerp(velocity, input * dash_force, 0.05)
 		velocity = move_and_slide(velocity)
