@@ -185,7 +185,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "InAir"
-length = 0.8
+length = 0.55
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -194,10 +194,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 105, 106, 107, 108, 109, 110, 111, 112 ]
+"values": [ 107, 108, 109, 110, 111, 112 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -353,7 +353,7 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "output", 0, "State" ]
+node_connections = [ "Movement", 0, "Animation", "Movement", 1, "Animation 2", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "output", 0, "State" ]
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.2, 1.2 )

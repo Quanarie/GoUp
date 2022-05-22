@@ -1,29 +1,34 @@
 extends KinematicBody2D
 
-export var time_to_start_falling = 0.5
 export var respawn_time = 5
 
-var is_falling = false
 var velocity = Vector2.ZERO
-var start_pos = Vector2.ZERO
+var is_triggered = false
+
+onready var animator = $AnimationPlayer
+onready var start_pos = global_position
 
 func _ready():
-	start_pos = position
+	set_physics_process(false)
 
 func _physics_process(delta):
-	if is_falling:
-		velocity.y += Globals.player.gravity * delta
-	
+	velocity.y += Globals.player.gravity * delta
 	velocity = move_and_slide(velocity)
 
 func _on_Area2D_body_entered(body):
-	if body == Globals.player and !is_falling:
-		yield(get_tree().create_timer(time_to_start_falling), "timeout")
-		is_falling = true
-		yield(get_tree().create_timer(respawn_time), "timeout")
-		respawn()
+	if !is_triggered and body == Globals.player:
+		is_triggered = true
+		animator.play("Shake")
+		velocity = Vector2.ZERO
 
-func respawn():
-	velocity = Vector2.ZERO
-	position = start_pos
-	is_falling = false
+func _on_AnimationPlayer_animation_finished(anim_name):
+	set_physics_process(true)
+	yield(get_tree().create_timer(respawn_time), "timeout")
+	set_physics_process(false)
+	yield(get_tree(), "physics_frame")
+	var temp = collision_layer
+	collision_layer = 0
+	global_position = start_pos
+	yield(get_tree(), "physics_frame")
+	collision_layer = temp
+	is_triggered = false

@@ -78,6 +78,11 @@ func dash():
 			yield(get_tree().create_timer(dash_duration), "timeout")
 			dashing = false
 	if dashing:
+		if !boots_active and velocity.x == 0 and input.y != 1:
+			velocity.y = -dash_force
+		elif boots_active and velocity.y == 0 and input.x != 1:
+			velocity.x = -dash_force
+		
 		if input != Vector2.ZERO:
 			velocity = lerp(velocity, input * dash_force, 0.05)
 		velocity = move_and_slide(velocity)
