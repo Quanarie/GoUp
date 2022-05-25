@@ -32,7 +32,7 @@ func _ready():
 	animationTree.active = true
 	Globals.player = self
 	Globals.playerStats = stats
-
+	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("activate_boots"):
 		if !boots_active: velocity.x = 0
@@ -46,7 +46,7 @@ func _physics_process(delta):
 	dash()
 	if !dashing:
 		movement(delta)
-	
+
 func dash():
 	if is_on_floor():
 		can_dash = true
@@ -60,23 +60,23 @@ func dash():
 		dash_direction = Vector2(-1, 0)
 	else:
 		dash_direction = Vector2(0, -1)
-		
+	
 	if Input.is_action_just_pressed("dash") and can_dash and !is_on_floor():
-		if dash_direction != Vector2.ZERO:
-			is_dash_animation_ended = false
-			animationTree.set("parameters/State/current", 3)
-			
-			if ((dash_direction.normalized() == Vector2(0, -1) and !boots_active) or
-				dash_direction.normalized() == Vector2(-1, 0) and boots_active):
-				animationTree.set("parameters/Dash/current", 1)
-			else:
-				animationTree.set("parameters/Dash/current", 0)
-			
-			velocity = dash_direction.normalized() * dash_force
-			can_dash = false
-			dashing = true
-			yield(get_tree().create_timer(dash_duration), "timeout")
-			dashing = false
+		is_dash_animation_ended = false
+		animationTree.set("parameters/State/current", 3)
+		
+		if ((dash_direction.normalized() == Vector2(0, -1) and !boots_active) or
+			dash_direction.normalized() == Vector2(-1, 0) and boots_active):
+			animationTree.set("parameters/Dash/current", 1)
+		else:
+			animationTree.set("parameters/Dash/current", 0)
+		
+		velocity = dash_direction.normalized() * dash_force
+		can_dash = false
+		dashing = true
+		flip_sprite()
+		yield(get_tree().create_timer(dash_duration), "timeout")
+		dashing = false
 	if dashing:
 		if !boots_active and velocity.x == 0 and input.y != 1:
 			velocity.y = -dash_force
@@ -108,6 +108,16 @@ func movement(delta):
 		active_boots_movement(delta)
 	else:
 		unactive_boots_movement(delta)
+		
+	flip_sprite()
+		
+func flip_sprite():
+	if boots_active:
+		if velocity.y < 0: sprite.flip_h = true
+		else: sprite.flip_h = false
+	else:
+		if velocity.x < 0: sprite.flip_h = false
+		else: sprite.flip_h = true
 
 func active_boots_movement(delta):
 	rotation_degrees = -90
@@ -119,18 +129,16 @@ func active_boots_movement(delta):
 		if velocity.y > 0:
 			velocity.y *= (1 - slowdown_coefficient_ground)   #helps to change direction faster
 		velocity.y = max(velocity.y - acceleration * delta, -max_speed)
-		sprite.flip_h = true
 	elif Input.is_action_pressed("ui_down"):
 		if velocity.y < 0:
 			velocity.y *= (1 - slowdown_coefficient_ground)
 		velocity.y = min(velocity.y + acceleration * delta, max_speed)
-		sprite.flip_h = false
 	else:
 		apply_friction = true
 	
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
-			velocity.x -= jump_force
+			velocity.x = -jump_force
 		if apply_friction:
 			velocity.y = lerp(velocity.y, 0, slowdown_coefficient_ground)
 	else:
@@ -153,18 +161,16 @@ func unactive_boots_movement(delta):
 		if velocity.x < 0:
 			velocity.x *= (1 - slowdown_coefficient_ground)   #helps to change direction faster
 		velocity.x = min(velocity.x + acceleration * delta, max_speed)
-		sprite.flip_h = true
 	elif Input.is_action_pressed("ui_left"):
 		if velocity.x > 0:
 			velocity.x *= (1 - slowdown_coefficient_ground)
 		velocity.x = max(velocity.x - acceleration * delta, -max_speed)
-		sprite.flip_h = false
 	else:
 		apply_friction = true
 	
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
-			velocity.y -= jump_force
+			velocity.y = -jump_force
 		if apply_friction:
 			velocity.x = lerp(velocity.x, 0, slowdown_coefficient_ground)
 	else:
@@ -178,7 +184,7 @@ func unactive_boots_movement(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func apply_force(force):
-	velocity = force
+	velocity += force
 
 func death():
 	stats.health = stats.max_health
