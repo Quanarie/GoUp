@@ -1,39 +1,88 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Art/TestTileset.png" type="Texture" id=1]
+[ext_resource path="res://Art/jumppil-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Environment/Platforms/Jumppad.gd" type="Script" id=2]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 2
-atlas = ExtResource( 1 )
-region = Rect2( 64, 192, 48, 16 )
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "apart"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 7.5 )
+extents = Vector2( 9, 9 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 22.5, 7.5 )
+extents = Vector2( 9, 9 )
 
 [node name="Jumppad" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+anims/RESET = SubResource( 4 )
+anims/apart = SubResource( 6 )
+anims/idle = SubResource( 5 )
+
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 1, 1, 0.662745, 1 )
-position = Vector2( -24.4096, -9 )
-texture = SubResource( 1 )
+position = Vector2( -16, -15 )
+texture = ExtResource( 1 )
 centered = false
-region_rect = Rect2( 0, 0, 48, 16 )
+hframes = 4
+vframes = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -0.409599, -1.5 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2( -0.5, -2.5 )
 shape = SubResource( 3 )
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
