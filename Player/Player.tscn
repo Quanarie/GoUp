@@ -329,7 +329,7 @@ input_3/name = "Dash"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=4]
-graph_offset = Vector2( 63.0338, 161.611 )
+graph_offset = Vector2( 0, 76.25 )
 nodes/Animation/node = SubResource( 14 )
 nodes/Animation/position = Vector2( 220, 80 )
 "nodes/Animation 2/node" = SubResource( 13 )
@@ -353,13 +353,11 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "output", 0, "State", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash" ]
+node_connections = [ "output", 0, "State", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Movement", 0, "Animation", "Movement", 1, "Animation 2" ]
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 2 )
-slowdown_coefficient_air = 0.2
-dash_duration = 0.3
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

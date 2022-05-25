@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Enemy/Spikes.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Other/Camera2D.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Environment/CheckPoint/CheckPoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/AppearingText.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Art/Blocks.png" type="Texture" id=11]
+[ext_resource path="res://Environment/PowerUps/DashReset.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=20]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -352,10 +353,6 @@ scale = Vector2( 1.2, 1.2 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 180, -2414 )
-acceleration = 800
-max_speed = 150
-jump_force = 375
-dash_force = 225
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -1141,6 +1138,17 @@ shape = SubResource( 56 )
 
 [node name="Label" parent="Texts/AppearingText3" index="1"]
 text = "SPACEx2 + SHIFT"
+
+[node name="DissapearingPlatform" parent="." instance=ExtResource( 7 )]
+position = Vector2( 44, 130 )
+rotation = -1.5708
+move_offset = Vector2( 0, 100 )
+is_turned = true
+
+[node name="Jumppad" parent="." instance=ExtResource( 8 )]
+
+[node name="DashReset" parent="." instance=ExtResource( 12 )]
+position = Vector2( 42, -9 )
 
 [editable path="Environment/Platforms/DissapearingPlatform3"]
 [editable path="Environment/Platforms/Platform12"]
