@@ -350,6 +350,7 @@ tile_data = PoolIntArray( -21561316, 0, 196608, -21561315, 0, 196609, -21561314,
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 180, -2414 )
 scale = Vector2( 1.2, 1.2 )
+zoom = Vector2( 0.9, 0.9 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 180, -2414 )
@@ -518,6 +519,8 @@ jump_force = Vector2( 0, -500 )
 [node name="Jumppad2" parent="Environment/Platforms" instance=ExtResource( 8 )]
 position = Vector2( 354, -2627 )
 jump_force = Vector2( 0, -500 )
+
+[node name="Platform24" parent="Environment/Platforms" instance=ExtResource( 6 )]
 
 [node name="Spikes" type="Node" parent="Environment"]
 

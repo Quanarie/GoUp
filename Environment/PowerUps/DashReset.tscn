@@ -214,7 +214,6 @@ tracks/4/keys = {
 }
 
 [node name="DashReset" type="Node2D"]
-scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
