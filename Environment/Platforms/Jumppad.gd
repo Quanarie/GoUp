@@ -14,6 +14,6 @@ func _on_Area2D_body_entered(body):
 		body.apply_force(jump_force)
 		animator.play("apart")
 	
-func _on_AnimationPlayer_animation_finished(apart):
+func _on_AnimationPlayer_animation_finished(_apart):
 	animator.play("idle")
 	

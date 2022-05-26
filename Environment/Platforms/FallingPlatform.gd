@@ -21,7 +21,7 @@ func _on_Area2D_body_entered(body):
 		animator.play("Shake")
 		velocity = Vector2.ZERO
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	set_physics_process(true)
 	yield(get_tree().create_timer(respawn_time), "timeout")
 	set_physics_process(false)
