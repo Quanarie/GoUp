@@ -53,7 +53,8 @@ position = Vector2( -334, -248 )
 duration = 5.0
 
 [node name="Demonaxe" parent="Environment" instance=ExtResource( 9 )]
-position = Vector2( -22, -184 )
+position = Vector2( -22, -310 )
+rotation = 0.263099
 pieces_quantity = 6
 bound_degree = 90
 
