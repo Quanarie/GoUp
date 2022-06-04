@@ -114,10 +114,10 @@ func movement(delta):
 func flip_sprite():
 	if boots_active:
 		if velocity.y < 0: sprite.flip_h = true
-		else: sprite.flip_h = false
+		elif velocity.y > 0: sprite.flip_h = false
 	else:
 		if velocity.x < 0: sprite.flip_h = false
-		else: sprite.flip_h = true
+		elif velocity.x > 0: sprite.flip_h = true
 
 func active_boots_movement(delta):
 	rotation_degrees = -90
