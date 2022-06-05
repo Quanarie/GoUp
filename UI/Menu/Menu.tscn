@@ -16,6 +16,7 @@ margin_left = -31.5
 margin_top = -34.0
 margin_right = 31.5
 margin_bottom = 34.0
+custom_constants/separation = 10
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 margin_right = 63.0
@@ -23,15 +24,15 @@ margin_bottom = 20.0
 text = "Start"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
+margin_top = 30.0
 margin_right = 63.0
-margin_bottom = 44.0
+margin_bottom = 50.0
 text = "Options"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 60.0
 margin_right = 63.0
-margin_bottom = 68.0
+margin_bottom = 80.0
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
