@@ -14,8 +14,8 @@ radius = 9.00002
 height = 10.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 7.0
-height = 10.0
+radius = 5.83333
+height = 6.66667
 
 [sub_resource type="Animation" id=12]
 resource_name = "AttackLeg"
@@ -353,7 +353,7 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "output", 0, "State", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash" ]
+node_connections = [ "output", 0, "State", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7" ]
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.2, 1.2 )
@@ -368,8 +368,7 @@ vframes = 13
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -4.76837e-07, 0.25 )
+position = Vector2( 1.89478e-13, 0.25 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 4 )]

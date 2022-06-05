@@ -33,7 +33,7 @@ func _ready():
 	Globals.player = self
 	Globals.playerStats = stats
 	
-func _process(delta):
+func _process(_delta):
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.get_collision_layer_bit(6):
