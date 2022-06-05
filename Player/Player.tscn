@@ -7,7 +7,7 @@
 [ext_resource path="res://Player/PlayerStats.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 9.75 )
+extents = Vector2( 5.83333, 9.75 )
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 9.00002
@@ -329,7 +329,7 @@ input_3/name = "Dash"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=4]
-graph_offset = Vector2( 0, 76.25 )
+graph_offset = Vector2( -29.85, 190.496 )
 nodes/Animation/node = SubResource( 14 )
 nodes/Animation/position = Vector2( 220, 80 )
 "nodes/Animation 2/node" = SubResource( 13 )
@@ -353,10 +353,11 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "output", 0, "State" ]
+node_connections = [ "output", 0, "State", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash" ]
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.2, 1.2 )
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -368,7 +369,7 @@ frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, 0.25 )
+position = Vector2( -4.76837e-07, 0.25 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 4 )]

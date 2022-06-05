@@ -9,7 +9,7 @@
 [ext_resource path="res://Environment/Platforms/Jumppad.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Environment/CheckPoint/CheckPoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Environment/Obstacles/Demonaxe/Demonaxe.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Other/Tileset.tres" type="TileSet" id=10]
+[ext_resource path="res://Other/WallsTileset.tres" type="TileSet" id=10]
 
 [node name="TestRoom" type="Node2D"]
 

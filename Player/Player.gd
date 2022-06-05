@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var gravity = 1000
 export var acceleration = 1000
-export var max_speed = 200
+export var max_speed = Vector2(200, 500)
 
 export var jump_force = 400
 export var jump_decrease_on_release_coefficient = 2
@@ -33,6 +33,12 @@ func _ready():
 	Globals.player = self
 	Globals.playerStats = stats
 	
+func _process(delta):
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.get_collision_layer_bit(6):
+			death()
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("activate_boots"):
 		if !boots_active: velocity.x = 0
@@ -121,18 +127,18 @@ func flip_sprite():
 
 func active_boots_movement(delta):
 	rotation_degrees = -90
-	velocity.x += gravity * delta
+	velocity.x = min(max_speed.y, velocity.x + gravity * delta)
 	
 	var apply_friction = false
 	
 	if Input.is_action_pressed("ui_up"):
 		if velocity.y > 0:
 			velocity.y *= (1 - slowdown_coefficient_ground)   #helps to change direction faster
-		velocity.y = max(velocity.y - acceleration * delta, -max_speed)
+		velocity.y = max(velocity.y - acceleration * delta, -max_speed.x)
 	elif Input.is_action_pressed("ui_down"):
 		if velocity.y < 0:
 			velocity.y *= (1 - slowdown_coefficient_ground)
-		velocity.y = min(velocity.y + acceleration * delta, max_speed)
+		velocity.y = min(velocity.y + acceleration * delta, max_speed.x)
 	else:
 		apply_friction = true
 	
@@ -153,18 +159,18 @@ func active_boots_movement(delta):
 
 func unactive_boots_movement(delta):
 	rotation_degrees = 0
-	velocity.y += gravity * delta
+	velocity.y = min(max_speed.y, velocity.y + gravity * delta)
 	
 	var apply_friction = false
 	
 	if Input.is_action_pressed("ui_right"):
 		if velocity.x < 0:
 			velocity.x *= (1 - slowdown_coefficient_ground)   #helps to change direction faster
-		velocity.x = min(velocity.x + acceleration * delta, max_speed)
+		velocity.x = min(velocity.x + acceleration * delta, max_speed.x)
 	elif Input.is_action_pressed("ui_left"):
 		if velocity.x > 0:
 			velocity.x *= (1 - slowdown_coefficient_ground)
-		velocity.x = max(velocity.x - acceleration * delta, -max_speed)
+		velocity.x = max(velocity.x - acceleration * delta, -max_speed.x)
 	else:
 		apply_friction = true
 	

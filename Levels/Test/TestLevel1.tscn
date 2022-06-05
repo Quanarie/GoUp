@@ -8,7 +8,7 @@
 [ext_resource path="res://Environment/Platforms/DissapearingPlatform.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Environment/Platforms/Jumppad.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Environment/Obstacles/Demonaxe/Demonaxe.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Other/Tileset.tres" type="TileSet" id=9]
+[ext_resource path="res://Other/WallsTileset.tres" type="TileSet" id=9]
 
 [node name="TestRoom" type="Node2D"]
 
