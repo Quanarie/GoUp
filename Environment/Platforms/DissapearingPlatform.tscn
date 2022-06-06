@@ -176,10 +176,10 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 8.25 )
+extents = Vector2( 32, 8 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 32, 7.5 )
+extents = Vector2( 32, 7.25 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "FadeIn"
@@ -419,8 +419,7 @@ playback/repeat = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2DPlayer" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2( 0, -2 )
+position = Vector2( 0, -1.75 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

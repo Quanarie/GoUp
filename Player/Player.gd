@@ -23,6 +23,8 @@ var is_dash_animation_ended = true
 
 var attacking = false
 
+var cat_bonuses = 0
+
 onready var sprite = $Sprite
 onready var stats = $PlayerStats
 onready var animationTree = $AnimationTree
@@ -194,9 +196,9 @@ func apply_force(force):
 
 func death():
 	stats.health = stats.max_health
-	position = stats.last_checkpoint
+	position = stats.last_checkpoint.position
+	boots_active = stats.last_checkpoint.is_turned
 	velocity = Vector2.ZERO
-	boots_active = false
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage

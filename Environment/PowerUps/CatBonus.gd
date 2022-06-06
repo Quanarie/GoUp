@@ -1,7 +1,5 @@
 extends Node2D
 
-export var lifetime = 0.2
-
 onready var animator = $AnimationPlayer
 
 func _ready():
@@ -9,5 +7,5 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
-		body.can_dash = true
+		body.cat_bonuses += 1
 		animator.play("Activate")

@@ -353,7 +353,7 @@ nodes/Movement/position = Vector2( 430, 80 )
 nodes/State/node = SubResource( 19 )
 nodes/State/position = Vector2( 700, 180 )
 nodes/output/position = Vector2( 880, 180 )
-node_connections = [ "output", 0, "State", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7" ]
+node_connections = [ "output", 0, "State", "InAir", 0, "Animation 4", "InAir", 1, "Animation 3", "Dash", 0, "Animation 6", "Dash", 1, "Animation 7", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "State", 0, "Movement", "State", 1, "InAir", "State", 2, "Animation 5", "State", 3, "Dash" ]
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 1.2, 1.2 )

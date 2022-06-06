@@ -1,4 +1,5 @@
-extends KinematicBody2D
+tool
+extends "res://Environment/Platforms/MovingObject.gd"
 
 export var respawn_time = 5
 
@@ -12,7 +13,10 @@ func _ready():
 	set_physics_process(false)
 
 func _physics_process(delta):
-	velocity.y += Globals.player.gravity * delta
+	if !is_turned:
+		velocity.y += Globals.player.gravity * delta
+	else:
+		velocity.x += Globals.player.gravity * delta
 	velocity = move_and_slide(velocity)
 
 func _on_Area2D_body_entered(body):
@@ -23,7 +27,9 @@ func _on_Area2D_body_entered(body):
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	set_physics_process(true)
+	tween.speed = 0
 	yield(get_tree().create_timer(respawn_time), "timeout")
+	tween.speed = 1
 	set_physics_process(false)
 	yield(get_tree(), "physics_frame")
 	var temp = collision_layer
