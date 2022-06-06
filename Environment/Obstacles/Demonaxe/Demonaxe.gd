@@ -1,5 +1,5 @@
 tool
-extends Node2D
+extends Node
 
 export var pieces_quantity = 5
 export var speed = 3

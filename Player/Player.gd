@@ -200,6 +200,7 @@ func death():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	SoundManager.hurt_player(self)
 	Globals.camera.shake()
 	if area:
 		area.recharge()

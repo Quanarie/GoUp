@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var crow = preload("res://Environment/CheckPoint/Crow.tscn")
 

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 export var speed_up_coefficient = 5
 

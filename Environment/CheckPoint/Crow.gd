@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 export var speed = 200
 export var alive_time = 15
